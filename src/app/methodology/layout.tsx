@@ -1,8 +1,14 @@
+import { TextContentLayout } from "../layout";
+
 export const metadata = {
   title: "Methodology",
 };
 
 const MethodologyLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return (
+    <>
+      <TextContentLayout>{children}</TextContentLayout>
+    </>
+  );
 };
 export default MethodologyLayout;

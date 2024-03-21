@@ -6,7 +6,7 @@ import {
   PropertyDetailSection,
   PropertyMap,
   SidePanel,
-  SidePanelControlBar
+  SidePanelControlBar,
 } from "@/components";
 import { FilterProvider } from "@/context/FilterContext";
 import { NextUIProvider } from "@nextui-org/react";
@@ -29,10 +29,11 @@ const MapPage: FC = () => {
     useState<boolean>(false);
   const [coordinates, setCoordinates] = useState<Coordinates>({
     lat: null,
-    lng: null
+    lng: null,
   });
 
   return (
+    // Cancel the default layout so the map spans to the whole page
     <FilterProvider>
       <NextUIProvider>
         <div className="flex flex-col h-screen">
@@ -128,7 +129,7 @@ export default MapPage;
 
 const StreetViewModal = ({
   children,
-  isOpen
+  isOpen,
 }: {
   children: React.ReactNode;
   isOpen: boolean;

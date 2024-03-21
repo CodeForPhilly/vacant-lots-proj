@@ -39,3 +39,11 @@ export default function RootLayout({
     </html>
   );
 }
+
+export function TextContentLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div className="container mx-auto pt-20 max-w-5xl p-5">{children}</div>
+    </div>
+  );
+}
