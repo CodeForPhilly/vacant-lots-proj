@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 const ZoomModal: FC = () => {
   return (
-    <div className={`absolute top-2 left-2 p-2 bg-white text-black z-50`}>
+    <div className={`relative top-[2vh] left-2 p-2 bg-white text-black w-fit z-30`}>
       Zoom in to see properties.
     </div>
   );

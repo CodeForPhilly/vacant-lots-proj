@@ -115,6 +115,7 @@ interface PropertyMapProps {
   selectedProperty: MapGeoJSONFeature | null;
   setSelectedProperty: (property: MapGeoJSONFeature | null) => void;
   setFeatureCount: Dispatch<SetStateAction<number>>;
+  setSmallScreenMode: Dispatch<SetStateAction<string>>;
 }
 const PropertyMap: FC<PropertyMapProps> = ({
   setFeaturesInView,
@@ -122,6 +123,7 @@ const PropertyMap: FC<PropertyMapProps> = ({
   selectedProperty,
   setSelectedProperty,
   setFeatureCount,
+  setSmallScreenMode
 }) => {
   const { appFilter } = useFilter();
   const [popupInfo, setPopupInfo] = useState<any | null>(null);
@@ -329,7 +331,7 @@ const PropertyMap: FC<PropertyMapProps> = ({
 
   // map load
   return (
-    <div className="customized-map relative h-full w-full">
+    <div className="customized-map relative max-sm:min-h-[calc(100svh-100px)] max-sm:max-h-[calc(100svh-100px) h-full w-full">
       <Map
         mapLib={maplibregl as any}
         initialViewState={{

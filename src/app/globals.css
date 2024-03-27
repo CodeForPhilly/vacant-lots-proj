@@ -245,3 +245,8 @@ a .bg-color-none {
 .tagSelected:active {
   @apply ease-in h-6 bg-blue-400;
 }
+
+/* Space between search bar and sidepanel, especially for small screens */
+.mapboxgl-ctrl-geocoder {
+  @apply mt-2;
+}

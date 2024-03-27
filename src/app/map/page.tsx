@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { FC, useRef, useState, useEffect } from "react";
 import {
   FilterView,
   Footer,
@@ -13,7 +13,6 @@ import { FilterProvider } from "@/context/FilterContext";
 import { NextUIProvider } from "@nextui-org/react";
 import { X } from "@phosphor-icons/react";
 import { MapGeoJSONFeature } from "maplibre-gl";
-import { FC, useState } from "react";
 import ReactDOM from "react-dom";
 import StreetView from "../../components/StreetView";
 import { centroid } from "@turf/centroid";
@@ -33,6 +32,52 @@ const MapPage: FC = () => {
   const [streetViewLocation, setStreetViewLocation] = useState<Position | null>(
     null,
   );
+  const [smallScreenMode, setSmallScreenMode] = useState("map");
+  const prevRef = useRef("map");
+  const sizeRef = useRef(0);
+
+  const updateCurrentView = (view: BarClickOptions) => {
+    setCurrentView(view === currentView ? "detail" : view);
+
+    if (prevRef.current === "map" && window.innerWidth < 640) {
+      setSmallScreenMode((prev : string) => (prev === "map" ? "properties" : "map"));
+    }
+  };
+
+  const updateSmallScreenMode = () => 
+    setSmallScreenMode((prev : string) => {
+      prevRef.current = prev === "map" ? "properties" : "map";
+      setCurrentView("detail");
+      return prevRef.current
+    });
+
+    /*
+      Because filter view is part of smallScreenMode = properties,
+      we need to switch to properties when filtering from map.
+      If filters are selected from small screen but screen is resized before applying them,
+      restores original small screen mode with the filters.
+     */
+    useEffect(() => {
+      sizeRef.current = window.innerWidth;
+      const updateWindowDimensions = () => {
+        if (sizeRef.current >= 640 && window.innerWidth < 640) {
+          setCurrentView(c => {
+            setSmallScreenMode(c !== "detail" ? "properties" : prevRef.current);
+            return c;
+          });
+        }
+        sizeRef.current = window.innerWidth;
+      };
+
+      window.addEventListener("resize", updateWindowDimensions);
+
+      return () => window.removeEventListener("resize", updateWindowDimensions);
+
+      }, []);
+  
+
+  const controlBarProps = {currentView, featureCount, loading, smallScreenMode, updateCurrentView, updateSmallScreenMode};
+  const isVisible = (mode : string) => (smallScreenMode === mode ? "" : "max-sm:hidden");
 
   useEffect(() => {
     if (!selectedProperty) return;
@@ -67,28 +112,27 @@ const MapPage: FC = () => {
                 />
               </div>
             </StreetViewModal>
-            <div className="flex-grow overflow-auto">
+            <div className={`flex-grow overflow-auto ${isVisible("map")}`}>
+              <div className={`sticky top-0 z-10 sm:hidden ${isVisible("map")}`}>
+                <SidePanelControlBar {...controlBarProps} />
+              </div>
               <PropertyMap
                 setFeaturesInView={setFeaturesInView}
                 setLoading={setLoading}
                 selectedProperty={selectedProperty}
                 setSelectedProperty={setSelectedProperty}
                 setFeatureCount={setFeatureCount}
+                setSmallScreenMode={setSmallScreenMode}
               />
             </div>
-            <SidePanel>
+            <SidePanel isVisible={isVisible("properties")} selectedProperty={selectedProperty}>
               {currentView === "filter" ? (
-                <FilterView setCurrentView={setCurrentView} />
+                <FilterView updateCurrentView={updateCurrentView} />
               ) : (
                 <>
                   {!selectedProperty && (
-                    <div className="sticky top-0 z-10">
-                      <SidePanelControlBar
-                        currentView={currentView}
-                        setCurrentView={setCurrentView}
-                        featureCount={featureCount}
-                        loading={loading}
-                      />
+                    <div className="h-14 sticky top-0 z-10">
+                      <SidePanelControlBar {...controlBarProps} />
                     </div>
                   )}
                   {currentView === "download" ? (
@@ -119,6 +163,8 @@ const MapPage: FC = () => {
                       selectedProperty={selectedProperty}
                       setSelectedProperty={setSelectedProperty}
                       setIsStreetViewModalOpen={setIsStreetViewModalOpen}
+                      smallScreenMode={smallScreenMode}
+                      updateCurrentView={updateCurrentView}
                     />
                   )}
                 </>

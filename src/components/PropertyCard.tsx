@@ -46,11 +46,11 @@ const PropertyCard = ({ feature, setSelectedProperty }: PropertyCardProps) => {
 
   return (
     <div
-      className="max-w-sm w-full md:w-1/2 p-2 cursor-pointer"
+      className="sm:max-w-sm w-full lg:w-1/2 p-2 max-lg:px-4 cursor-pointer max-lg:flex max-lg:justify-center"
       onClick={handleClick}
     >
-      <div className="max-w-sm w-full p-4">
-        <div className="bg-white rounded-md overflow-hidden">
+      <div className="max-w-sm w-full h-full">
+        <div className="bg-white h-full flex flex-col rounded-md overflow-hidden p-2 hover:bg-gray-100">
           <div
             className="relative w-full rounded-lg overflow-hidden"
             style={{ height: "160px", width: "auto" }}
@@ -63,7 +63,7 @@ const PropertyCard = ({ feature, setSelectedProperty }: PropertyCardProps) => {
               unoptimized
             />
           </div>
-          <div className="p-2">
+          <div className="grow p-2">
             <button className="font-bold heading-lg" onKeyDown={handleKeyDown}>
               {formattedAddress}
             </button>

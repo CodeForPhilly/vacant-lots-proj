@@ -50,10 +50,10 @@ const filters = [
 ];
 
 type FilterViewProps = {
-  setCurrentView: (view: BarClickOptions) => void;
+  updateCurrentView: (view: BarClickOptions) => void;
 };
 
-const FilterView: FC<FilterViewProps> = ({ setCurrentView }) => {
+const FilterView: FC<FilterViewProps> = ({ updateCurrentView }) => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center">
@@ -61,7 +61,7 @@ const FilterView: FC<FilterViewProps> = ({ setCurrentView }) => {
         <Button
           size="sm"
           className="bg-gray-100 text-gray-900"
-          onPress={() => setCurrentView("detail")}
+          onPress={() => updateCurrentView("detail")}
         >
           <PiCheck className="size-4" />
           Done

@@ -14,17 +14,20 @@ import {
 } from "@phosphor-icons/react";
 import SinglePropertyInfoCard from "./SinglePropertyInfoCard";
 import { Dispatch, SetStateAction } from "react";
+import { BarClickOptions } from "@/app/map/page";
 
 interface PropertyDetailProps {
   property: MapGeoJSONFeature | null;
   setSelectedProperty: (property: MapGeoJSONFeature | null) => void;
   setIsStreetViewModalOpen: Dispatch<SetStateAction<boolean>>;
+  updateCurrentView: (view: BarClickOptions) => void;
 }
 
 const SinglePropertyDetail = ({
   property,
   setSelectedProperty,
   setIsStreetViewModalOpen,
+  updateCurrentView
 }: PropertyDetailProps) => {
   if (!property) return null;
   const { properties } = property;
@@ -64,6 +67,7 @@ const SinglePropertyDetail = ({
     </th>
   );
 
+
   return (
     <div
       className="w-full p-4"
@@ -75,10 +79,8 @@ const SinglePropertyDetail = ({
     >
       <div className="pb-4">
         <Button
-          style={{
-            backgroundColor: "white",
-          }}
-          onPress={() => setSelectedProperty(null)}
+          onPress={() => {setSelectedProperty(null); updateCurrentView("detail")}}
+          className="bg-white rounded-md hover:bg-gray-100"
         >
           <ArrowLeft color="#3D3D3D" size={24} />{" "}
           <span className="body-md">Back</span>{" "}
@@ -94,7 +96,7 @@ const SinglePropertyDetail = ({
             unoptimized
           />
           <button
-            className="absolute top-4 right-4 bg-white p-[10px] rounded-md"
+            className="absolute top-4 right-4 bg-white p-[10px] rounded-md hover:bg-gray-100"
             onClick={() => setIsStreetViewModalOpen(true)}
             aria-label="Open full screen street view map"
           >
