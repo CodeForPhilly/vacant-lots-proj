@@ -24,7 +24,7 @@ To make sure the repo is protected and organized, merges to `main` are not allow
 
 If you're unclear on the precise implementation of a ticket, please refer to [the prototype](https://www.figma.com/proto/NAFkgq34abW6uJ0R7PW24T/Prototype---Clean-%26-Green-Philly?page-id=187%3A12602&type=design&node-id=2592-30019&viewport=-657%2C-623%2C0.1&t=fqZvOvLyE9qv7AAV-8&scaling=min-zoom&starting-point-node-id=2592%3A30019&hide-ui=1).
 
-Note: when you have completed an issue and are ready to close it, please tag Arielle (@Moylena) so she can review it. Thanks!
+Note: when you have completed an issue and are ready to close it, please tag the appropriate reviewe(s). It it's a front-end issue, tag @paulhchoi and @thansidwell (plus @brandonfcohen1 if it involves the map). If it's a back-end issue, tag @brandonfcohen1. Feel free to drop a message in the Slack channel if you have questions.
 
 ## Open an Issue
 
