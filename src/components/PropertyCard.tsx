@@ -52,8 +52,8 @@ const PropertyCard = ({ feature, setSelectedProperty }: PropertyCardProps) => {
       <div className="max-w-sm w-full p-4">
         <div className="bg-white rounded-md overflow-hidden">
           <div
-            className="relative w-full rounded-lg overflow-hidden"
-            style={{ height: "160px", width: "auto" }}
+            className="relative w-full rounded-lg overflow-hidden h-80"
+            // style={{ height: "160px", width: "auto" }}
           >
             <Image
               src={image}

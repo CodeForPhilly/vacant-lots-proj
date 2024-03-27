@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true, // Enable the option here
     "plugins": [
       {
         "name": "next"
@@ -29,7 +30,5 @@
     ".next/types/**/*.ts",
     "eslint-plugin-custom-rules/**/*.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

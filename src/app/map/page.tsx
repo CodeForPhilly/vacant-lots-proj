@@ -31,7 +31,7 @@ const MapPage: FC = () => {
   const [isStreetViewModalOpen, setIsStreetViewModalOpen] =
     useState<boolean>(false);
   const [streetViewLocation, setStreetViewLocation] = useState<Position | null>(
-    null,
+    null
   );
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const MapPage: FC = () => {
   return (
     <FilterProvider>
       <NextUIProvider>
-        <div className="flex flex-col">
+        <div className="flex flex-col pt-24">
           <div className="flex flex-grow overflow-hidden">
             <StreetViewModal isOpen={isStreetViewModalOpen}>
               <div
@@ -144,6 +144,6 @@ const StreetViewModal = ({
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <div className="absolute inset-0 z-50 w-full h-full">{children}</div>,
-    document.body,
+    document.body
   );
 };

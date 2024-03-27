@@ -1,4 +1,4 @@
-export { default as Header } from "./Header";
+export { default as Header } from "./Header/Header";
 export { default as Hotjar } from "./Hotjar";
 export { default as Footer } from "./Footer";
 export { default as PropertyMap } from "./PropertyMap";
