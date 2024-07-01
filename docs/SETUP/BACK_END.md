@@ -4,6 +4,29 @@
 
 If you are planning to contribute to the data wrangling and database management on this project and will need to run the Python script, follow the installation and setup instructions below.
 
+### TL;DR
+Here's the short version of the setup:
+1. Fork the repo; clone a local copy of your fork
+2. Create a .env file in the `/data` subdirectory. Add the following:
+    ```
+    POSTGRES_PASSWORD=a-strong-password-here
+    VACANT_LOTS_DB=postgresql://postgres:${POSTGRES_PASSWORD}@localhost/vacantlotdb
+    ```
+3. Create a free Google Cloud Platform account. Generate an API key under APIs and Services -> Credentials. Copy and paste it into your `/data/,env` file as CLEAN_GREEN_GOOGLE_KEY. Go to Cloud storage -> Buckets and create a new bucket.  Name it logically, e.g. cleanandgreenphl-{your_initials}.  It has to be globally unique.  Grant access to at least write to the bucket to your service account.  Put your bucket name in the GOOGLE_CLOUD_BUCKET_NAME variable.  Make sure the tiles file in your bucket is publicly accessible by following Google's instructions online. Under APIs and Services -> Credentials, create a service account.  After you create the service account you will download the service account private key file named like encoded-keyword-ddd-xxx.json.  Copy that to ~/.config/gcloud/application_default_credentials.json.  This path is specified by default in the volumes section of the docker compose file. Your `/data/.env` file should now look like this:
+    ```
+    POSTGRES_PASSWORD=a-strong-password-here
+    VACANT_LOTS_DB=postgresql://postgres:${POSTGRES_PASSWORD}@localhost/vacantlotdb
+    CLEAN_GREEN_GOOGLE_KEY=your-api-key-here
+    OOGLE_CLOUD_BUCKET_NAME=your-bucket-name-here
+    ```
+4. Make sure everything is saved. Open a terminal and navigate to the `/data` subdirectory. Run `docker-compose build` to build the container for the first time. When this has finished, also run `docker-compose build postgres` to build the postgres container.
+5. When both processes have finished, run `docker-compose up -d postgres` to connect to the PG database in the container. If this is your first time running this script, set `FORCE_RELOAD=True` in `/data/config/config.py` to populate the database tables with fresh data. Then, run `docker-compose run vacant-lots-proj`. 
+6. To run the streetview images script, run `docker-compose run streetview`.
+
+Formatting is implemented in `black` using `docker-compose run formatter`. Data differences are calculated automatically in the vacant-lots-proj script using `data-diff`.
+
+To shut off the Docker container, run docker-compose down.
+
 ## Setup
 
 ### Fork the Repository
