@@ -81,7 +81,7 @@ const ContentCard: FC<ContentCardProps> = ({
               links.map((link, index) => (
                 <ThemeButtonLink
                   key={index}
-                  className="text-blue-700 !bg-green-100 !px-0 !py-0 mb-2 h-5 !text-left !items-start"
+                  className="text-blue-900 !bg-green-100 !px-0 !py-0 mb-2 h-5 !text-left !items-start"
                   color="tertiary"
                   aria-label={link.text + " Link opens in new tab"}
                   href={link.url}

@@ -303,7 +303,7 @@ export default function TransformPropertyPage() {
           their parks.
         </p>
         <ThemeButtonLink
-          className="text-[#0070F0] inline-flex"
+          className="text-blue-900 inline-flex"
           href={parkInATruckUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -326,7 +326,7 @@ export default function TransformPropertyPage() {
           housing in historically neglected neighborhoods.
         </p>
         <ThemeButtonLink
-          className="text-[#0070F0] inline-flex"
+          className="text-blue-900 inline-flex"
           href={jumpStartUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -347,7 +347,7 @@ export default function TransformPropertyPage() {
           and connect you with other resources.
         </p>
         <ThemeButtonLink
-          className="text-[#0070F0] inline-flex"
+          className="text-blue-900  inline-flex"
           href={localRepresentativesUrl}
           target="_blank"
           rel="noopener noreferrer"
