@@ -33,12 +33,18 @@ export default function TransformPropertyPage() {
       <div className="grid grid-cols-1 md:grid-cols-1 gap-6 md:gap-10">
         <Image
           src={beforeAfter}
-          alt={
-            "A Philadelphia lot before a clean up and the same lot, filled with trees and greenery after a clean up."
-          }
+          alt=""
           placeholder="blur"
           className="w-full overflow-hidden rounded-[20px] aspect-video md:aspect-auto object-cover object-center"
+          aria-labelledby="caption-before-after-image"
         />
+        <h2
+          id="caption-before-after-image"
+          className="text-md font-bold text-center"
+        >
+          A Philadelphia lot before a clean up and the same lot, filled with
+          trees and greenery after a clean up.
+        </h2>
       </div>
 
       <h2 className="heading-2xl font-bold mt-8 mb-6">Basic Interventions</h2>
